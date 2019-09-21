@@ -1,9 +1,9 @@
-package edu.missouriwestern.csmp.gg.server.entities;
+package edu.missouriwestern.csmp.gg.mwsu.entities;
 
 import edu.missouriwestern.csmp.gg.base.*;
 import edu.missouriwestern.csmp.gg.base.events.CommandEvent;
-import edu.missouriwestern.csmp.gg.server.events.FlagEvent;
-import edu.missouriwestern.csmp.gg.server.networking.StompClient;
+import edu.missouriwestern.csmp.gg.mwsu.events.FlagEvent;
+import edu.missouriwestern.csmp.gg.mwsu.game.StompClient;
 
 import java.util.logging.Logger;
 

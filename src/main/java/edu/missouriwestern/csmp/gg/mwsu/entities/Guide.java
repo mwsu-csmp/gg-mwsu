@@ -1,18 +1,14 @@
-package edu.missouriwestern.csmp.gg.server.entities;
+package edu.missouriwestern.csmp.gg.mwsu.entities;
 
 import edu.missouriwestern.csmp.gg.base.*;
 import edu.missouriwestern.csmp.gg.base.events.CommandEvent;
 import edu.missouriwestern.csmp.gg.base.events.GameStartEvent;
-import edu.missouriwestern.csmp.gg.server.events.SpeechEvent;
-import edu.missouriwestern.csmp.gg.server.networking.StompClient;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
+import edu.missouriwestern.csmp.gg.mwsu.events.SpeechEvent;
+import edu.missouriwestern.csmp.gg.mwsu.game.StompClient;
 
 import java.util.Map;
 import java.util.logging.Logger;
 
-@Component("guide")
 public class Guide extends Entity implements EventListener, Runnable {
 
     private static Logger logger = Logger.getLogger(Guide.class.getCanonicalName());
@@ -20,9 +16,7 @@ public class Guide extends Entity implements EventListener, Runnable {
             "Find the key in order to reach the Spellcraft Area!",
             "Start by searching around for Items!"};
 
-
-    @Autowired
-    public Guide(@Qualifier("game") Game game) {
+    public Guide(Game game) {
         super(game, Map.of("sprites", "guide",
                            "character", "?",
                             "description", "a friendly guide"));

@@ -1,4 +1,4 @@
-package edu.missouriwestern.csmp.gg.server.events;
+package edu.missouriwestern.csmp.gg.mwsu.events;
 
 import edu.missouriwestern.csmp.gg.base.*;
 

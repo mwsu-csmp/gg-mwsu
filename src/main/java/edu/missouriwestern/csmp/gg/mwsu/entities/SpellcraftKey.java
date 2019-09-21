@@ -1,4 +1,4 @@
-package edu.missouriwestern.csmp.gg.server.entities;
+package edu.missouriwestern.csmp.gg.mwsu.entities;
 
 import edu.missouriwestern.csmp.gg.base.Container;
 import edu.missouriwestern.csmp.gg.base.Entity;
