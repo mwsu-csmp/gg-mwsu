@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+                           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <util:map id="tile-types" map-class="java.util.HashMap">
+        <entry value="wall" key="#"/>
+        <entry value="door" key="@"/>
+        <entry value="locked-door" key="L"/>
+        <entry value="floor" key="-"/>
+        <entry value="guide-spawn" key="%"/>
+        <entry value="player-spawn" key="*"/>
+        <entry value="box-spawn" key="B"/>
+        <entry value="chest" key="▣"/>
+        <entry value="goal" key="X"/>
+        <entry value="goal-barrier" key="⚐"/>
+    </util:map>
+
+    <bean id="game" class="edu.missouriwestern.csmp.gg.server.game.MissouriWizardStateUniversityGame">
+        <constructor-arg name="dataStore" ref="datastore"/>
+        <constructor-arg name="taskExecutor" ref="taskExecutor"/>
+        <constructor-arg name="listeners">
+            <list>
+                <bean id="logger" class="edu.missouriwestern.csmp.gg.server.persistance.EventLogger"/>
+                <bean id="logger" class="edu.missouriwestern.csmp.gg.server.networking.StompEventFowarder"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="chest1" class="edu.missouriwestern.csmp.gg.server.entities.Chest">
+        <constructor-arg ref="game"/>
+        <constructor-arg>
+            <bean factory-bean="aggensteinFoyer" factory-method="getTile">
+                <constructor-arg value = "10"/>
+                <constructor-arg value = "11"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="locked-door-1" class="edu.missouriwestern.csmp.gg.server.entities.LockedDoor">
+        <constructor-arg ref="game"/>
+        <constructor-arg>
+            <bean factory-bean="aggensteinFoyer" factory-method="getTile">
+                <constructor-arg value = "28"/>
+                <constructor-arg value = "11"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg ref="SpellcraftKey"/>
+    </bean>
+
+
+
+    <bean id="SpellcraftKey" class="edu.missouriwestern.csmp.gg.server.entities.SpellcraftKey">
+        <constructor-arg index="0" ref="game"/>
+        <constructor-arg index="1" ref="chest1"/>
+    </bean>
+    <bean id="outside-map" class="edu.missouriwestern.csmp.gg.server.game.MissouriWizardStateUniversityGame" factory-method="loadMap">
+        <constructor-arg value="outside-map.txt"/>
+    </bean>
+    <bean id="foyer-map" class="edu.missouriwestern.csmp.gg.server.game.MissouriWizardStateUniversityGame" factory-method="loadMap">
+        <constructor-arg value="foyer-map.txt"/>
+    </bean>
+    <bean id="aggensteinFoyer-map" class="edu.missouriwestern.csmp.gg.server.game.MissouriWizardStateUniversityGame" factory-method="loadMap">
+        <constructor-arg value="aggensteinFoyer-map.txt"/>
+    </bean>
+    <bean id="spellcraftFoyer-map" class="edu.missouriwestern.csmp.gg.server.game.MissouriWizardStateUniversityGame" factory-method="loadMap">
+        <constructor-arg value="spellcraftFoyer-map.txt"/>
+    </bean>
+
+
+    <bean id="outside" class="edu.missouriwestern.csmp.gg.base.Board">
+        <constructor-arg index="0" ref="tile-types">
+        </constructor-arg>
+        <constructor-arg index="1" ref="game"/>
+        <constructor-arg index="2" value="outside"/>
+        <constructor-arg index="3" ref="outside-map"/>
+        <constructor-arg index="4">
+            <map>
+                <entry key="*">
+                    <map>
+                        <entry key="entering-entity-spawn" value="true"/>
+                    </map>
+                </entry>
+                <entry key="#">
+                    <map>
+                        <entry key="impassable" value="true"/>
+                    </map>
+                </entry>
+            </map>
+        </constructor-arg>
+        <constructor-arg index="5">
+            <map>
+                <entry>
+                    <key>
+                        <bean class="net.sourcedestination.funcles.tuple.Pair"
+                              factory-method="makePair">
+                            <constructor-arg index="0" value="8"/>
+                            <constructor-arg index="1" value="0"/>
+                        </bean>
+                    </key>
+                    <map>
+                        <entry key="portal-destination-board" value="foyer"/>
+                    </map>
+                </entry>
+            </map>
+        </constructor-arg>
+    </bean>
+
+    <bean id="foyer" class="edu.missouriwestern.csmp.gg.base.Board">
+        <constructor-arg index="0" ref="tile-types"/>
+        <constructor-arg index="1" ref="game"/>
+        <constructor-arg index="2" value="foyer"/>
+        <constructor-arg index="3" ref="foyer-map"/>
+        <constructor-arg index="4">
+            <map>
+                <entry key="*">
+                    <map>
+                        <entry key="entering-entity-spawn" value="true"/>
+                    </map>
+                </entry>
+                <entry key="#">
+                    <map>
+                        <entry key="impassable" value="true"/>
+                    </map>
+                </entry>
+                <entry key="⚐">
+                    <map>
+                        <entry key="impassable" value="true"/>
+                    </map>
+                </entry>
+            </map>
+        </constructor-arg>
+        <constructor-arg index="5">
+            <map>
+                <entry>
+                    <key>
+                        <bean class="net.sourcedestination.funcles.tuple.Pair"
+                              factory-method="makePair">
+                            <constructor-arg index="0" value="22"/>
+                            <constructor-arg index="1" value="3"/>
+                        </bean>
+                    </key>
+                    <map>
+                        <entry key="portal-destination-board" value="aggensteinFoyer"/>
+                    </map>
+                </entry>
+            </map>
+        </constructor-arg>
+    </bean>
+
+
+
+    <bean id="aggensteinFoyer" class="edu.missouriwestern.csmp.gg.base.Board">
+        <constructor-arg index="0" ref="tile-types"/>
+        <constructor-arg index="1" ref="game"/>
+        <constructor-arg index="2" value="aggensteinFoyer"/>
+        <constructor-arg index="3" ref="aggensteinFoyer-map"/>
+        <constructor-arg index="4">
+            <map>
+                <entry key="*">
+                    <map>
+                        <entry key="entering-entity-spawn" value="true"/>
+                    </map>
+                </entry>
+                <entry key="#">
+                    <map>
+                        <entry key="impassable" value="true"/>
+                    </map>
+                </entry>
+                <entry key="⚐">
+                    <map>
+                        <entry key="impassable" value="true"/>
+                    </map>
+                </entry>
+            </map>
+        </constructor-arg>
+        <constructor-arg index="5">
+            <map>
+                <entry>
+                    <key>
+                        <bean class="net.sourcedestination.funcles.tuple.Pair"
+                              factory-method="makePair">
+                            <constructor-arg index="0" value="28"/>
+                            <constructor-arg index="1" value="10"/>
+                        </bean>
+                    </key>
+                    <map>
+                        <entry key="portal-destination-board" value="spellcraftFoyer"/>
+                    </map>
+                </entry>
+            </map>
+        </constructor-arg>
+    </bean>
+
+    <bean id="spellcraftFoyer" class="edu.missouriwestern.csmp.gg.base.Board">
+        <constructor-arg index="0" ref="tile-types"/>
+        <constructor-arg index="1" ref="game"/>
+        <constructor-arg index="2" value="spellcrafftFoyer"/>
+        <constructor-arg index="3" ref="spellcraftFoyer-map"/>
+        <constructor-arg index="4">
+            <map>
+                <entry key="*">
+                    <map>
+                        <entry key="entering-entity-spawn" value="true"/>
+                    </map>
+                </entry>
+                <entry key="#">
+                    <map>
+                        <entry key="impassable" value="true"/>
+                    </map>
+                </entry>
+                <entry key="⚐">
+                    <map>
+                        <entry key="impassable" value="true"/>
+                    </map>
+                </entry>
+            </map>
+        </constructor-arg>
+        <constructor-arg index="5">
+            <map>
+                <entry>
+                    <key>
+                        <bean class="net.sourcedestination.funcles.tuple.Pair"
+                              factory-method="makePair">
+                            <constructor-arg index="0" value="1"/>
+                            <constructor-arg index="1" value="1"/>
+                        </bean>
+                    </key>
+                    <map>
+                        <entry key="portal-destination-board" value="foyer"/>
+                    </map>
+                </entry>
+            </map>
+        </constructor-arg>
+    </bean>
+</beans>
