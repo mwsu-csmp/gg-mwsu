@@ -1,7 +1,6 @@
 package edu.missouriwestern.csmp.gg.mwsu.entities;
 
 import edu.missouriwestern.csmp.gg.base.*;
-import edu.missouriwestern.csmp.gg.base.events.CommandEvent;
 
 import java.util.Map;
 import java.util.logging.Logger;
@@ -10,26 +9,28 @@ import java.util.logging.Logger;
 
 /** gives a player a presence within the game */
 @Permanent
-public class PlayerAvatar extends Entity implements EventListener, Container {
+public class Player extends Entity implements Agent {
 
-    private final Player player;
-    private static Logger logger = Logger.getLogger(PlayerAvatar.class.getCanonicalName());
+    private static Logger logger = Logger.getLogger(Player.class.getCanonicalName());
 
+    private final String id;
 
-    public PlayerAvatar(Game game, Player player) {
-        super(game, Map.of("player", player.getID()));
-        this.player = player;
-        game.registerListener(player);
-        reset();
+    public Player(Game game, String id) {
+        super(game, Map.of("player", id));
+        this.id = id;
     }
 
-    /** returns the player associated with this avatar entity */
-    public Player getPlayer() { return player; }
+    @Override
+    public String getAgentID() { return id; }
 
     @Override
-    public void accept(Event event) {
-        if(event instanceof CommandEvent) {
-            if(event.getProperty("player").equals(player.getID())) {
+    public String getRole() { return "player"; }
+
+    @Override
+    public void acceptEvent(Event event) {
+        switch(event.getType()) {
+            case "command":
+            if(event.getProperty("player").equals(getAgentID())) {
                 switch(event.getProperty("command")) {
                     case "MOVE": // move entity in the specified direction
                         var location = getGame().getEntityLocation(this);
@@ -73,6 +74,6 @@ public class PlayerAvatar extends Entity implements EventListener, Container {
     }
 
     public String getType() {
-        return "player-avatar";
+        return getRole();
     }
 }

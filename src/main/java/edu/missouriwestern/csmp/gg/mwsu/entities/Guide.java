@@ -1,15 +1,11 @@
 package edu.missouriwestern.csmp.gg.mwsu.entities;
 
 import edu.missouriwestern.csmp.gg.base.*;
-import edu.missouriwestern.csmp.gg.base.events.CommandEvent;
-import edu.missouriwestern.csmp.gg.base.events.GameStartEvent;
-import edu.missouriwestern.csmp.gg.mwsu.events.SpeechEvent;
-import edu.missouriwestern.csmp.gg.mwsu.game.StompClient;
 
 import java.util.Map;
 import java.util.logging.Logger;
 
-public class Guide extends Entity implements EventListener, Runnable {
+public class Guide extends Entity implements EventListener {
 
     private static Logger logger = Logger.getLogger(Guide.class.getCanonicalName());
     private final String[] messages = {"Welcome to GG-Project!",
@@ -23,27 +19,32 @@ public class Guide extends Entity implements EventListener, Runnable {
         game.registerListener(this);
     }
 
-    public void accept(Event event) {
-        if(event instanceof GameStartEvent) reset(); // move to spawn point at start of game
-        else if(event instanceof CommandEvent) { // see if someone wants you to talk to them
-            var command = (CommandEvent)event;
-            if(command.getCommandName().equals("INTERACT")) {
+    @Override
+    public void acceptEvent(Event event) {
+        switch(event.getType()) {
+            case "game-start":
+                reset(); // move to spawn point at start of game
+                break;
+            case "command":  // see if someone wants you to talk to them
+            if(event.getProperty("command").equals("INTERACT")) {
                 logger.info("Interact was pressed");
-                var player = getGame().getPlayer(command.getProperty("player"));
-                if(player instanceof StompClient) { // TODO: this cast sucks, shouldn't be tied to client, rethink approach
-                    var avatar = ((StompClient)player).getAvatar();
+                var player = getGame().getAgent(event.getProperty("player"));
+                if (player instanceof Player) { // TODO: this cast sucks, shouldn't be tied to client, rethink approach
+                    var avatar = ((Player) player);
                     var avatarLocation = getGame().getEntityLocation(avatar);
-                    if(avatarLocation instanceof Tile) {
-                        var tile = (Tile)avatarLocation;
+                    if (avatarLocation instanceof Tile) {
+                        var tile = (Tile) avatarLocation;
                         var board = tile.getBoard();
-                        var target = board.getAdjacentTile(tile, Direction.valueOf(command.getProperty("parameter")));
-                        if(target == getGame().getEntityLocation(this)) { // someone is interacting with us
-                            getGame().accept(new SpeechEvent(getGame(), this,
-                                    messages[(int)(Math.random()*messages.length)]));
+                        var target = board.getAdjacentTile(tile, Direction.valueOf(event.getProperty("parameter")));
+                        if (target == getGame().getEntityLocation(this)) { // someone is interacting with us
+                            getGame().propagateEvent(new Event(getGame(), "speech-event",
+                                    Map.of("entity", ""+this.getID(),
+                                    "message", messages[(int) (Math.random() * messages.length)])));
                         }
                     }
                 }
             }
+            break;
         }
     }
 
@@ -55,7 +56,7 @@ public class Guide extends Entity implements EventListener, Runnable {
         getGame().moveEntity(this, location);
     }
 
-    @Override
+    // TODO: convert this to using timeout events
     public void run() {
         while(true) { // walk randomly indefinitely
             try { Thread.sleep(10000); } catch(Exception e) {}
