@@ -5,6 +5,12 @@
        xsi:schemaLocation="http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
                            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean id="game" class="edu.missouriwestern.csmp.gg.mwsu.MissouriWizardStateUniversityGame">
+        <constructor-arg ref="data-store"/>
+        <constructor-arg ref="event-propagator"/>
+        <constructor-arg ref="event-source"/>
+    </bean>
+
     <util:map id="tile-types" map-class="java.util.HashMap">
         <entry value="wall" key="#"/>
         <entry value="door" key="@"/>
@@ -29,13 +35,9 @@
     </bean>
 
     <bean id="locked-door-1" class="edu.missouriwestern.csmp.gg.mwsu.tiles.LockedDoor">
-        <constructor-arg ref="game"/>
-        <constructor-arg>
-            <bean factory-bean="aggensteinFoyer" factory-method="getTile">
-                <constructor-arg value = "28"/>
-                <constructor-arg value = "11"/>
-            </bean>
-        </constructor-arg>
+        <constructor-arg ref="aggensteinFoyer"/>
+        <constructor-arg value = "28"/>
+        <constructor-arg value = "11"/>
         <constructor-arg ref="SpellcraftKey"/>
     </bean>
 
@@ -45,16 +47,16 @@
         <constructor-arg index="0" ref="game"/>
         <constructor-arg index="1" ref="chest1"/>
     </bean>
-    <bean id="outside-map" class="edu.missouriwestern.csmp.gg.mwsu.MissouriWizardStateUniversityGame" factory-method="loadMap">
+    <bean id="outside-map" class="edu.missouriwestern.csmp.gg.base.Board" factory-method="loadMap">
         <constructor-arg value="outside-map.txt"/>
     </bean>
-    <bean id="foyer-map" class="edu.missouriwestern.csmp.gg.mwsu.MissouriWizardStateUniversityGame" factory-method="loadMap">
+    <bean id="foyer-map" class="edu.missouriwestern.csmp.gg.base.Board" factory-method="loadMap">
         <constructor-arg value="foyer-map.txt"/>
     </bean>
-    <bean id="aggensteinFoyer-map" class="edu.missouriwestern.csmp.gg.mwsu.MissouriWizardStateUniversityGame" factory-method="loadMap">
+    <bean id="aggensteinFoyer-map" class="edu.missouriwestern.csmp.gg.base.Board" factory-method="loadMap">
         <constructor-arg value="aggensteinFoyer-map.txt"/>
     </bean>
-    <bean id="spellcraftFoyer-map" class="edu.missouriwestern.csmp.gg.mwsu.MissouriWizardStateUniversityGame" factory-method="loadMap">
+    <bean id="spellcraftFoyer-map" class="edu.missouriwestern.csmp.gg.base.Board" factory-method="loadMap">
         <constructor-arg value="spellcraftFoyer-map.txt"/>
     </bean>
 
