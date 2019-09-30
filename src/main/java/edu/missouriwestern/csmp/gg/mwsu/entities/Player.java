@@ -30,7 +30,7 @@ public class Player extends Entity implements Agent {
     public void acceptEvent(Event event) {
         switch(event.getType()) {
             case "command":
-            if(event.getProperty("player").equals(getAgentID())) {
+            if(event.getProperty("username").equals(getAgentID())) {
                 switch(event.getProperty("command")) {
                     case "MOVE": // move entity in the specified direction
                         var location = getGame().getEntityLocation(this);

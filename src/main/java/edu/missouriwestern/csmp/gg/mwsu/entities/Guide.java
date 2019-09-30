@@ -28,7 +28,7 @@ public class Guide extends Entity implements EventListener {
             case "command":  // see if someone wants you to talk to them
             if(event.getProperty("command").equals("INTERACT")) {
                 logger.info("Interact was pressed");
-                var player = getGame().getAgent(event.getProperty("player"));
+                var player = getGame().getAgent(event.getProperty("username"));
                 if (player instanceof Player) { // TODO: this cast sucks, shouldn't be tied to client, rethink approach
                     var avatar = ((Player) player);
                     var avatarLocation = getGame().getEntityLocation(avatar);

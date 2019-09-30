@@ -23,7 +23,7 @@ public class LockedDoor extends Tile implements EventListener {
             case "command":
                 if (event.getProperty("command").equals("INTERACT")) {
                     logger.info("Interact was pressed");
-                    var player = getGame().getAgent(event.getProperty("player"));
+                    var player = getGame().getAgent(event.getProperty("username"));
                     if (player instanceof Player) {
                         var avatar = ((Player) player);
                         var avatarLocation = getGame().getEntityLocation(avatar);
