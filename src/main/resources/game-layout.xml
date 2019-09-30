@@ -9,6 +9,7 @@
         <constructor-arg ref="data-store"/>
         <constructor-arg ref="event-propagator"/>
         <constructor-arg ref="event-source"/>
+        <constructor-arg value="outside"/>
     </bean>
 
     <util:map id="tile-types" map-class="java.util.HashMap">
@@ -141,8 +142,6 @@
         </constructor-arg>
     </bean>
 
-
-
     <bean id="aggensteinFoyer" class="edu.missouriwestern.csmp.gg.base.Board">
         <constructor-arg index="0" ref="tile-types"/>
         <constructor-arg index="1" ref="game"/>
@@ -188,7 +187,7 @@
     <bean id="spellcraftFoyer" class="edu.missouriwestern.csmp.gg.base.Board">
         <constructor-arg index="0" ref="tile-types"/>
         <constructor-arg index="1" ref="game"/>
-        <constructor-arg index="2" value="spellcrafftFoyer"/>
+        <constructor-arg index="2" value="spellcraftFoyer"/>
         <constructor-arg index="3" ref="spellcraftFoyer-map"/>
         <constructor-arg index="4">
             <map>

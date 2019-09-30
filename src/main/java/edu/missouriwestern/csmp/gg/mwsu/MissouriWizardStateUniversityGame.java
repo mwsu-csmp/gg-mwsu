@@ -11,10 +11,26 @@ public class MissouriWizardStateUniversityGame extends Game {
 
     private static Logger logger = Logger.getLogger(MissouriWizardStateUniversityGame.class.getCanonicalName());
 
+    private Tile spawn; // player spawn
+    private final String initialMapName;
+
     public MissouriWizardStateUniversityGame(DataStore dataStore,
                                              EventListener eventPropagator,
-                                             Consumer<EventListener> incomingEventCallback) {
+                                             Consumer<EventListener> incomingEventCallback,
+                                             String initialMapName) {
         super(dataStore, eventPropagator, incomingEventCallback);
+        this.initialMapName = initialMapName;
+    }
+
+    @Override
+    public void addBoard(String boardId, Board board) {
+        if (boardId.equals(initialMapName)) {
+            var spawn = board.getTileStream()
+                    .filter(tile -> tile.getType().equals("player-spawn"))
+                    .findFirst();
+            if (spawn.isPresent()) this.spawn = spawn.get();
+        }
+        super.addBoard(boardId, board);
     }
 
     public Agent getAgent(String id, String role) {
@@ -23,6 +39,7 @@ public class MissouriWizardStateUniversityGame extends Game {
         if(role.equals("player")) {
             var player = new Player(this, id);
             addAgent(player);
+            this.moveEntity(player, spawn);
             return player;
         }
         return null;
