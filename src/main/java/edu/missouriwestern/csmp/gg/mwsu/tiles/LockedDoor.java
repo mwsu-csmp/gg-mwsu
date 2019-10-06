@@ -12,8 +12,10 @@ public class LockedDoor extends Tile implements EventListener {
     private boolean locked = true;
     private Entity key;
 
-    public LockedDoor(Board board, int column, int row, Entity key) {
-        super(board, column, row, "locked-door", Map.of("impassable", "true"));
+    public LockedDoor(int column, int row, Entity key) {
+        super(column, row, "locked-door", 'L',
+                Map.of( "character", "L",
+                        "impassable", "true"));
         this.key = key;
     }
 
