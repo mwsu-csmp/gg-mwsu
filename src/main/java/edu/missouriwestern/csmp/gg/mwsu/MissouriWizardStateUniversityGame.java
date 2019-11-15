@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 public class MissouriWizardStateUniversityGame extends Game {
 
     private static Logger logger = Logger.getLogger(MissouriWizardStateUniversityGame.class.getCanonicalName());
-
+    //spawn
     private Tile spawn; // player spawn
 
     public MissouriWizardStateUniversityGame(DataStore dataStore,
