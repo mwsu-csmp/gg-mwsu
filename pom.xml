@@ -20,6 +20,19 @@
         </plugins>
     </build>
 
+    <repositories>
+        <repository>
+            <id>jbkm-mwsu-staging</id>
+            <url>https://packagecloud.io/jbkm/mwsu-staging/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -29,7 +42,7 @@
         <dependency>
             <groupId>edu.missouriwestern.csmp.gg</groupId>
             <artifactId>2dapi</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <version>0.1</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin.external.google</groupId>
