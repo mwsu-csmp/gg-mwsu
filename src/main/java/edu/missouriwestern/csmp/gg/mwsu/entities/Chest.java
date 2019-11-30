@@ -19,7 +19,7 @@ public class Chest extends Entity implements EventListener, Container {
     }
 
     @Override
-    public void acceptEvent(Event event)  //If somebody interacts with a chest
+    public void acceptEvent(Event event)  { //If somebody interacts with a chest
         switch(event.getType()) {
             case "command":
            if (event.getProperty("command").equals("INTERACT")) {
