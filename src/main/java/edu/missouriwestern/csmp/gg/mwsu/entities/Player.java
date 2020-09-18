@@ -38,21 +38,23 @@ public class Player extends Entity implements Agent {
                         var tile = (Tile)location;
                         var board = tile.getBoard();
                         var direction = Direction.valueOf(event.getProperty("parameter"));
-                        var destination = board.getAdjacentTile(tile, direction);
+                        final var destination = board.getAdjacentTile(tile, direction);
+                        var finalDestination = destination;
                         if(destination != null) { // if we're walking to a valid location...
                             if(destination.hasProperty("impassable") &&
                                     !destination.getProperty("impassable").equals("false"))
                                 break;  // can't walk on to an impassable tile
                             // determine if we walked through a door
                             if(destination.hasProperty("portal-destination-board")) {
-                                destination = getGame()  // update destination to new board
+                                finalDestination = getGame()  // update destination to new board
                                         .getBoard(destination.getProperty("portal-destination-board"))
                                         .getTileStream()
-                                        .filter(t -> t.hasProperty("entering-entity-spawn"))
+                                        .filter(t -> t.column == Integer.parseInt(destination.getProperty("portal-destination-column")) &&
+                                                     t.row== Integer.parseInt(destination.getProperty("portal-destination-row")))
                                         .findFirst().get();
                             }
 
-                            getGame().moveEntity(this, destination);
+                            getGame().moveEntity(this, finalDestination);
                         }
                         break;
                     default:

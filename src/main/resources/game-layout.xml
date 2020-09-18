@@ -21,7 +21,48 @@
                     <constructor-arg name="tileGenerators" ref="tile-generators"/>
                     <constructor-arg name="initialTiles">
                         <list>
+                            <bean id="outside-door" class="edu.missouriwestern.csmp.gg.base.Tile">
+                                <constructor-arg name="column" value="8"/>
+                                <constructor-arg name="row" value="0"/>
+                                <constructor-arg name="type" value="door"/>
+                                <constructor-arg name="character" value="@"/>
+                                <constructor-arg name="properties">
+                                    <util:map>
+                                        <entry key="description" value="door to aggenstein foyer"/>
+                                        <entry key="portal-destination-board" value="foyer"/>
+                                        <entry key="portal-destination-row" value="16"/>
+                                        <entry key="portal-destination-column" value="11"/>
+                                    </util:map>
+                                </constructor-arg>
+                            </bean>
+                        </list>
+                    </constructor-arg>
+                </bean>
 
+                <bean class="edu.missouriwestern.csmp.gg.base.Board">
+                    <constructor-arg name="name" value="foyer"/>
+                    <constructor-arg name="charMap">
+                        <bean id="foyer-map" class="edu.missouriwestern.csmp.gg.base.Board" factory-method="loadMap">
+                            <constructor-arg value="foyer-map.txt"/>
+                        </bean>
+                    </constructor-arg>
+                    <constructor-arg name="tileGenerators" ref="tile-generators"/>
+                    <constructor-arg name="initialTiles">
+                        <list>
+                            <bean id="outside-door" class="edu.missouriwestern.csmp.gg.base.Tile">
+                                <constructor-arg name="column" value="11"/>
+                                <constructor-arg name="row" value="16"/>
+                                <constructor-arg name="type" value="door"/>
+                                <constructor-arg name="character" value="@"/>
+                                <constructor-arg name="properties">
+                                    <util:map>
+                                        <entry key="description" value="door to aggenstein foyer"/>
+                                        <entry key="portal-destination-board" value="outside"/>
+                                        <entry key="portal-destination-row" value="0"/>
+                                        <entry key="portal-destination-column" value="8"/>
+                                    </util:map>
+                                </constructor-arg>
+                            </bean>
                         </list>
                     </constructor-arg>
                 </bean>
@@ -54,13 +95,34 @@
                 </constructor-arg>
             </bean>
         </entry>
+        <entry key="-">
+            <bean class="edu.missouriwestern.csmp.gg.base.Tile" factory-method="getGenerator">
+                <constructor-arg name="character" value=" "/>
+                <constructor-arg name="type" value="floor"/>
+                <constructor-arg name="properties">
+                    <map>
+                        <entry key="description" value="just a normal floor tile"/>
+                    </map>
+                </constructor-arg>
+            </bean>
+        </entry>
         <entry key="*">
             <bean class="edu.missouriwestern.csmp.gg.base.Tile" factory-method="getGenerator">
-                <constructor-arg name="character" value="*"/>
+                <constructor-arg name="character" value=" "/>
                 <constructor-arg name="type" value="player-spawn"/>
                 <constructor-arg name="properties">
                     <map>
                         <entry key="description" value="the starting point for players"/>
+                    </map>
+                </constructor-arg>
+            </bean>
+        </entry>
+        <entry key="@">
+            <bean class="edu.missouriwestern.csmp.gg.base.Tile" factory-method="getGenerator">
+                <constructor-arg name="character" value="@"/>
+                <constructor-arg name="type" value="door"/>
+                <constructor-arg name="properties">
+                    <map>
                     </map>
                 </constructor-arg>
             </bean>
