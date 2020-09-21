@@ -87,7 +87,7 @@
         <entry key=" ">
             <bean class="edu.missouriwestern.csmp.gg.base.Tile" factory-method="getGenerator">
                 <constructor-arg name="character" value=" "/>
-                <constructor-arg name="type" value="floor"/>
+                <constructor-arg name="type" value="grass"/>
                 <constructor-arg name="properties">
                     <map>
                         <entry key="description" value="just a normal floor tile"/>
@@ -97,7 +97,7 @@
         </entry>
         <entry key="-">
             <bean class="edu.missouriwestern.csmp.gg.base.Tile" factory-method="getGenerator">
-                <constructor-arg name="character" value=" "/>
+                <constructor-arg name="character" value="-"/>
                 <constructor-arg name="type" value="floor"/>
                 <constructor-arg name="properties">
                     <map>
