@@ -183,6 +183,7 @@
         <map type="IndividualSpriteSettingsMap">
             <key type="filename">entity-player.png</key>
             <key type="filename">entity.png</key>
+            <key type="filename">tile-door.png</key>
             <key type="filename">tile-grass.png</key>
             <key type="filename">tile-wall.png</key>
             <key type="filename">tile.png</key>
@@ -203,11 +204,12 @@
         </map>
         <key>fileList</key>
         <array>
-            <filename>entity-player.png</filename>
-            <filename>entity.png</filename>
             <filename>tile-grass.png</filename>
             <filename>tile-wall.png</filename>
+            <filename>tile-door.png</filename>
+            <filename>entity-player.png</filename>
             <filename>tile.png</filename>
+            <filename>entity.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
