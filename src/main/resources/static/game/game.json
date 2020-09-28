@@ -16,7 +16,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
 	"sourceSize": {"w":64,"h":64}
 },
-"tile-grass.png":
+"tile-door.png":
 {
 	"frame": {"x":128,"y":0,"w":64,"h":64},
 	"rotated": false,
@@ -24,7 +24,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
 	"sourceSize": {"w":64,"h":64}
 },
-"tile-wall.png":
+"tile-grass.png":
 {
 	"frame": {"x":192,"y":0,"w":64,"h":64},
 	"rotated": false,
@@ -32,9 +32,17 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
 	"sourceSize": {"w":64,"h":64}
 },
-"tile.png":
+"tile-wall.png":
 {
 	"frame": {"x":256,"y":0,"w":64,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
+},
+"tile.png":
+{
+	"frame": {"x":320,"y":0,"w":64,"h":64},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
@@ -45,8 +53,8 @@
 	"version": "1.0",
 	"image": "game.png",
 	"format": "RGBA8888",
-	"size": {"w":320,"h":64},
+	"size": {"w":384,"h":64},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:8fc6af4958df3a7c61a3e1e6f10a267d:d948361e902facf3821c50c364069efb:fc2835210f98bae8e8c1b7f0a84c9321$"
+	"smartupdate": "$TexturePacker:SmartUpdate:eef444e3a6f979022492d490ba527c05:8be679b395e8403a7faa4783813fa478:fc2835210f98bae8e8c1b7f0a84c9321$"
 }
 }
