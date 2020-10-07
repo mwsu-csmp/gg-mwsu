@@ -181,6 +181,23 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">chest-closed.png</key>
+            <key type="filename">key.png</key>
+            <key type="filename">merchant.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0,0</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>16,16,32,32</rect>
+                <key>scale9Paddings</key>
+                <rect>16,16,32,32</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">entity-player.png</key>
             <key type="filename">entity.png</key>
             <key type="filename">tile-door.png</key>
@@ -210,6 +227,9 @@
             <filename>entity-player.png</filename>
             <filename>tile.png</filename>
             <filename>entity.png</filename>
+            <filename>chest-closed.png</filename>
+            <filename>key.png</filename>
+            <filename>merchant.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
