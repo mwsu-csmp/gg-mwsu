@@ -32,6 +32,36 @@
             </list>
         </constructor-arg>
     </bean>
+
+
+    <bean class="edu.missouriwestern.csmp.gg.base.Board" id="foyer">
+        <constructor-arg name="name" value="foyer"/>
+        <constructor-arg name="charMap">
+            <bean id="foyer-map" class="edu.missouriwestern.csmp.gg.base.Board" factory-method="loadMap">
+                <constructor-arg value="foyer-map.txt"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg name="tileGenerators" ref="tile-generators"/>
+        <constructor-arg name="initialTiles">
+            <list>
+                <bean id="outside-door" class="edu.missouriwestern.csmp.gg.base.Tile">
+                    <constructor-arg name="column" value="11"/>
+                    <constructor-arg name="row" value="16"/>
+                    <constructor-arg name="type" value="door"/>
+                    <constructor-arg name="character" value="@"/>
+                    <constructor-arg name="properties">
+                        <util:map>
+                            <entry key="description" value="door to aggenstein foyer"/>
+                            <entry key="portal-destination-board" value="outside"/>
+                            <entry key="portal-destination-row" value="0"/>
+                            <entry key="portal-destination-column" value="8"/>
+                        </util:map>
+                    </constructor-arg>
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+
     <bean id="game" class="edu.missouriwestern.csmp.gg.mwsu.MissouriWizardStateUniversityGame">
         <constructor-arg name="dataStore" ref="data-store"/>
         <constructor-arg name="eventPropagator" ref="event-propagator"/>
@@ -39,37 +69,12 @@
         <constructor-arg name="boards">
             <list>
                 <ref bean="outside"/>
-                <bean class="edu.missouriwestern.csmp.gg.base.Board">
-                    <constructor-arg name="name" value="foyer"/>
-                    <constructor-arg name="charMap">
-                        <bean id="foyer-map" class="edu.missouriwestern.csmp.gg.base.Board" factory-method="loadMap">
-                            <constructor-arg value="foyer-map.txt"/>
-                        </bean>
-                    </constructor-arg>
-                    <constructor-arg name="tileGenerators" ref="tile-generators"/>
-                    <constructor-arg name="initialTiles">
-                        <list>
-                            <bean id="outside-door" class="edu.missouriwestern.csmp.gg.base.Tile">
-                                <constructor-arg name="column" value="11"/>
-                                <constructor-arg name="row" value="16"/>
-                                <constructor-arg name="type" value="door"/>
-                                <constructor-arg name="character" value="@"/>
-                                <constructor-arg name="properties">
-                                    <util:map>
-                                        <entry key="description" value="door to aggenstein foyer"/>
-                                        <entry key="portal-destination-board" value="outside"/>
-                                        <entry key="portal-destination-row" value="0"/>
-                                        <entry key="portal-destination-column" value="8"/>
-                                    </util:map>
-                                </constructor-arg>
-                            </bean>
-                        </list>
-                    </constructor-arg>
-                </bean>
+                <ref bean="foyer"/>
 
             </list>
         </constructor-arg>
     </bean>
+
 
     <util:map id="tile-generators" map-class="java.util.HashMap">
         <entry key="#">
@@ -134,6 +139,15 @@
             <bean factory-bean="outside" factory-method="getTile">
                 <constructor-arg value = "5"/>
                 <constructor-arg value = "5"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+    <bean id="shopkeeper" class="edu.missouriwestern.csmp.gg.mwsu.entities.ShopKeeper">
+        <constructor-arg ref="game"/>
+        <constructor-arg>
+            <bean factory-bean="foyer" factory-method="getTile">
+                <constructor-arg value = "10"/>
+                <constructor-arg value = "0"/>
             </bean>
         </constructor-arg>
     </bean>
