@@ -5,7 +5,6 @@ import edu.missouriwestern.csmp.gg.base.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.logging.Logger;
 
 public class ShopKeeper extends Entity implements EventListener, Runnable {
@@ -32,17 +31,23 @@ public class ShopKeeper extends Entity implements EventListener, Runnable {
                 reset(); // move to spawn point at start of game
                 break;
             case "command":  // see if someone wants you to talk to them
-                switch(event.getProperty("command")) {
+                switch(event.getString("command")) {
+                    case "SPEECH":
+                        var message = event.getString("message");
+                        if(message.startsWith("buy ")) {
+                            var item = message.substring(4);
+
+                        }
                     case "INTERACT":
                         logger.info("Interact was pressed");
-                        var player = getGame().getAgent(event.getProperty("username"));
+                        var player = getGame().getAgent(event.getString("username"));
                         if (player instanceof Player) { // TODO: this cast sucks, shouldn't be tied to client, rethink approach
                             var avatar = ((Player) player);
                             var avatarLocation = getGame().getEntityLocation(avatar);
                             if (avatarLocation instanceof Tile) {
                                 var tile = (Tile) avatarLocation;
                                 var board = tile.getBoard();
-                                var target = board.getAdjacentTile(tile, Direction.valueOf(event.getProperty("parameter")));
+                                var target = board.getAdjacentTile(tile, Direction.valueOf(event.getString("direction")));
 
                                 // get nearby tiles
                                 var myLocation = getGame().getEntityLocation(this);
@@ -59,10 +64,13 @@ public class ShopKeeper extends Entity implements EventListener, Runnable {
                                 if(board.getAdjacentTile(myTile, Direction.NORTH) != null)
                                     nearbyTiles.add(board.getAdjacentTile(myTile, Direction.NORTH));
                                 if (nearbyTiles.contains(target)) { // someone is interacting with us
-                                    getGame().propagateEvent(new Event(getGame(), "speech-event",
+                                    getGame().propagateEvent(new Event(getGame(), "speech",
                                             Map.of("entity", ""+this.getID(),
                                                     "message", "what would you like to buy?",
-                                                    "responseChoices", "[\"potion\",\"sword\",\"key\"]")));
+                                                    "responseChoices", List.of(
+                                                            "buy potion",
+                                                            "buy sword",
+                                                            "buy key"))));
                                 }
                             }
                         }

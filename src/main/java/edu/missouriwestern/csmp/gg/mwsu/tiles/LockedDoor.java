@@ -25,7 +25,7 @@ public class LockedDoor extends Tile implements EventListener {
             case "command":
                 if (event.getProperty("command").equals("INTERACT")) {
                     logger.info("Interact was pressed");
-                    var player = getGame().getAgent(event.getProperty("username"));
+                    var player = getGame().getAgent(event.getString("username"));
                     if (player instanceof Player) {
                         var avatar = ((Player) player);
                         var avatarLocation = getGame().getEntityLocation(avatar);
@@ -33,7 +33,7 @@ public class LockedDoor extends Tile implements EventListener {
                             var avatarTile = (Tile) avatarLocation;
                             var board = avatarTile.getBoard();
                             var target = board.getAdjacentTile(avatarTile,
-                                    event.getDirection("parameter").get());
+                                    event.getDirection("direction").get());
 
                             if (target == this) { // someone is interacting with us
                                 if (avatar.containsEntity(this.key)) {

@@ -31,13 +31,13 @@ public class Player extends Entity implements Agent {
         switch(event.getType()) {
             case "command":
             if(event.getProperty("username").equals(getAgentID())) {
-                switch(event.getProperty("command")) {
+                switch(event.getString("command")) {
                     case "MOVE": // move entity in the specified direction
                         var location = getGame().getEntityLocation(this);
                         if(!(location instanceof Tile)) return;
                         var tile = (Tile)location;
                         var board = tile.getBoard();
-                        var direction = Direction.valueOf(event.getProperty("parameter"));
+                        var direction = event.getDirection("direction").get();
                         final var destination = board.getAdjacentTile(tile, direction);
                         var finalDestination = destination;
                         if(destination != null) { // if we're walking to a valid location...
@@ -47,10 +47,10 @@ public class Player extends Entity implements Agent {
                             // determine if we walked through a door
                             if(destination.hasProperty("portal-destination-board")) {
                                 finalDestination = getGame()  // update destination to new board
-                                        .getBoard(destination.getProperty("portal-destination-board"))
+                                        .getBoard(destination.getString("portal-destination-board"))
                                         .getTileStream()
-                                        .filter(t -> t.column == Integer.parseInt(destination.getProperty("portal-destination-column")) &&
-                                                     t.row== Integer.parseInt(destination.getProperty("portal-destination-row")))
+                                        .filter(t -> t.column == destination.getInteger("portal-destination-column") &&
+                                                     t.row== destination.getInteger("portal-destination-row"))
                                         .findFirst().get();
                             }
 

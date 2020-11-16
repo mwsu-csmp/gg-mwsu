@@ -24,14 +24,14 @@ public class Chest extends Entity implements EventListener, Container {
             case "command":
            if (event.getProperty("command").equals("INTERACT")) {
                 if (getProperty("lid").equals("closed")) {
-                    var player = getGame().getAgent(event.getProperty("username"));
+                    var player = getGame().getAgent(event.getString("username"));
                     if (player instanceof Player) {
                         var avatar = ((Player) player);
                         var avatarLocation = getGame().getEntityLocation(avatar);
                         if (avatarLocation instanceof Tile) {
                             var tile = (Tile) avatarLocation;
                             var board = tile.getBoard();
-                            var target = board.getAdjacentTile(tile, Direction.valueOf(event.getProperty("parameter")));
+                            var target = board.getAdjacentTile(tile, Direction.valueOf(event.getString("direction")));
                             if (target == getGame().getEntityLocation(this)) {
                                 getEntities().forEach(avatar::addEntity);
                                 this.setProperty("lid", "open");
