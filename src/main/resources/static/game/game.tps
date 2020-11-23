@@ -182,9 +182,16 @@
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
             <key type="filename">chest-closed.png</key>
+            <key type="filename">chest-open.png</key>
             <key type="filename">key.png</key>
             <key type="filename">merchant-wings.png</key>
             <key type="filename">merchant.png</key>
+            <key type="filename">player-boy-left.png</key>
+            <key type="filename">player-boy-mid.png</key>
+            <key type="filename">player-boy-right.png</key>
+            <key type="filename">player-girl-left.png</key>
+            <key type="filename">player-girl-mid.png</key>
+            <key type="filename">player-girl-right.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -232,6 +239,13 @@
             <filename>key.png</filename>
             <filename>merchant.png</filename>
             <filename>merchant-wings.png</filename>
+            <filename>player-girl-right.png</filename>
+            <filename>player-girl-mid.png</filename>
+            <filename>player-girl-left.png</filename>
+            <filename>player-boy-right.png</filename>
+            <filename>player-boy-mid.png</filename>
+            <filename>player-boy-left.png</filename>
+            <filename>chest-open.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
