@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import static edu.missouriwestern.csmp.gg.base.Direction.*;
+
 public class ShopKeeper extends Entity implements EventListener, Runnable {
 
     private static Logger logger = Logger.getLogger(Guide.class.getCanonicalName());
@@ -19,6 +21,7 @@ public class ShopKeeper extends Entity implements EventListener, Runnable {
     public ShopKeeper(Game game, Container startingLocation) {
         super(game, Map.of("sprites", "shopkeeper",
                 "character", "?",
+                "impassable", "true",
                 "description", "aggenstein shopkeeper"),
                 startingLocation);
         game.registerListener(this);
@@ -31,14 +34,28 @@ public class ShopKeeper extends Entity implements EventListener, Runnable {
                 reset(); // move to spawn point at start of game
                 break;
             case "command":  // see if someone wants you to talk to them
-                switch(event.getString("command")) {
-                    case "SPEECH":
+                switch(event.getString("command").toLowerCase()) {
+                    case "speech":
                         var message = event.getString("message");
                         if(message.startsWith("buy ")) {
                             var item = message.substring(4);
-
+                            switch (item) {
+                                case "key":
+                                    var myLocation = getGame().getEntityLocation(this);
+                                    if(!(myLocation instanceof Tile)) return;  // need to be on the map to interact
+                                    var board = ((Tile) myLocation).getBoard();
+                                    var dest = board.getAdjacentTile((Tile)myLocation, SOUTH);
+                                    dest = board.getAdjacentTile(dest, SOUTH);
+                                    dest = board.getAdjacentTile(dest, SOUTH);
+                                    var chest = new Chest(getGame(), dest);
+                                    var key = new SpellcraftKey(getGame(), chest);
+                                    getGame().propagateEvent(new Event(getGame(), "speech",
+                                            Map.of("entity", ""+this.getID(),
+                                                    "message", "your purchase is in the chest")));
+                                    break;
+                            }
                         }
-                    case "INTERACT":
+                    case "interact":
                         logger.info("Interact was pressed");
                         var player = getGame().getAgent(event.getString("username"));
                         if (player instanceof Player) { // TODO: this cast sucks, shouldn't be tied to client, rethink approach

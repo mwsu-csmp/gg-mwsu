@@ -33,8 +33,12 @@ public class Chest extends Entity implements EventListener, Container {
                             var board = tile.getBoard();
                             var target = board.getAdjacentTile(tile, Direction.valueOf(event.getString("direction")));
                             if (target == getGame().getEntityLocation(this)) {
-                                getEntities().forEach(avatar::addEntity);
-                                this.setProperty("lid", "open");
+                                // dump / destroy chest
+                                var myLocation = getGame().getEntityLocation(this);
+                                if(!(myLocation instanceof Tile)) return;  // need to be on the map to interact
+                                var myTile = (Tile)myLocation;
+                                getEntities().forEach(myTile::addEntity);
+                                myTile.removeEntity(this);
                             }
                         }
                     }

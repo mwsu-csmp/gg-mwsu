@@ -16,7 +16,8 @@ public class Player extends Entity implements Agent {
     private final String id;
 
     public Player(Game game, String id) {
-        super(game, Map.of("player", id));
+        super(game, Map.of("player", id,
+                "impassable", "true"));
         this.id = id;
     }
 
@@ -44,6 +45,15 @@ public class Player extends Entity implements Agent {
                             if(destination.hasProperty("impassable") &&
                                     !destination.getProperty("impassable").equals("false"))
                                 break;  // can't walk on to an impassable tile
+
+                            if(destination.getEntities()
+                                    .filter(ent -> ent.hasProperty("impassable") &&
+                                                   !ent.getProperty("impassable").equals("false"))
+                                    .findFirst().isPresent()) {
+                                // can't walk on to a tile with impassable contents
+                                break;
+                            }
+
                             // determine if we walked through a door
                             if(destination.hasProperty("portal-destination-board")) {
                                 finalDestination = getGame()  // update destination to new board

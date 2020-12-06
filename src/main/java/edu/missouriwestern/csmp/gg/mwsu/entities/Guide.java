@@ -20,6 +20,7 @@ public class Guide extends Entity implements EventListener, Runnable {
     public Guide(Game game, Container startingLocation) {
         super(game, Map.of("sprites", "guide",
                            "character", "?",
+                           "impassable", "true",
                             "description", "a friendly guide"),
                 startingLocation);
         game.registerListener(this);
