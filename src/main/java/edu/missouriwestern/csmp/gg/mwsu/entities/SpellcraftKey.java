@@ -17,6 +17,6 @@ public class SpellcraftKey extends Entity {
 
     @Override
     public String getType() {
-        return "SpellcraftKey";
+        return "key";
     }
 }

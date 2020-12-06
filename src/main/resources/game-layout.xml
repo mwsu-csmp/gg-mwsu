@@ -88,6 +88,18 @@
                 </constructor-arg>
             </bean>
         </entry>
+        <entry key="%">
+            <bean class="edu.missouriwestern.csmp.gg.base.Tile" factory-method="getGenerator">
+                <constructor-arg name="character" value="%"/>
+                <constructor-arg name="type" value="countertop"/>
+                <constructor-arg name="properties">
+                    <map>
+                        <entry key="impassable" value="true"/>
+                        <entry key="description" value="countertop"/>
+                    </map>
+                </constructor-arg>
+            </bean>
+        </entry>
         <entry key=" ">
             <bean class="edu.missouriwestern.csmp.gg.base.Tile" factory-method="getGenerator">
                 <constructor-arg name="character" value=" "/>
