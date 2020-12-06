@@ -206,14 +206,18 @@
             </bean>
         </constructor-arg>
     </bean>
-<!--
-    <bean id="locked-door-1" class="edu.missouriwestern.csmp.gg.mwsu.tiles.LockedDoor">
-        <constructor-arg ref="aggensteinFoyer"/>
-        <constructor-arg value = "28"/>
-        <constructor-arg value = "11"/>
-        <constructor-arg ref="SpellcraftKey"/>
+
+    <bean id="locked-door-1" class="edu.missouriwestern.csmp.gg.mwsu.entities.LockedDoor">
+        <constructor-arg ref="game"/>
+        <constructor-arg>
+            <bean factory-bean="foyer" factory-method="getTile">
+                <constructor-arg value = "22"/>
+                <constructor-arg value = "3"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg value="key"/>
     </bean>
-/-->
+
 
 
 </beans>

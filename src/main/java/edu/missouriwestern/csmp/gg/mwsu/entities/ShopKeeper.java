@@ -64,7 +64,10 @@ public class ShopKeeper extends Entity implements EventListener, Runnable {
                             if (avatarLocation instanceof Tile) {
                                 var tile = (Tile) avatarLocation;
                                 var board = tile.getBoard();
-                                var target = board.getAdjacentTile(tile, Direction.valueOf(event.getString("direction")));
+                                if(!event.getDirection().isPresent()) {
+                                    break; // interactions must have a direction
+                                }
+                                var target = board.getAdjacentTile(tile, event.getDirection().get());
 
                                 // get nearby tiles
                                 var myLocation = getGame().getEntityLocation(this);

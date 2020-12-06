@@ -1,22 +1,22 @@
-package edu.missouriwestern.csmp.gg.mwsu.tiles;
+package edu.missouriwestern.csmp.gg.mwsu.entities;
 
 import edu.missouriwestern.csmp.gg.base.*;
-import edu.missouriwestern.csmp.gg.mwsu.entities.Player;
 
 import java.util.Map;
 import java.util.logging.Logger;
 
-public class LockedDoor extends Tile implements EventListener {
+public class LockedDoor extends Entity implements EventListener {
     private static Logger logger = Logger.getLogger(LockedDoor.class.getCanonicalName());
     private final String[] messages = {"Unlocked the door"};
     private boolean locked = true;
-    private Entity key;
+    private String keyType;
 
-    public LockedDoor(int column, int row, Entity key) {
-        super(column, row, "locked-door", 'L',
+    public LockedDoor(Game game, Container startingLocation, String keyType) {
+        super(game,
                 Map.of( "character", "L",
-                        "impassable", "true"));
-        this.key = key;
+                        "impassable", "true"),
+                startingLocation);
+        this.keyType = keyType;
     }
 
     @Override
@@ -35,10 +35,11 @@ public class LockedDoor extends Tile implements EventListener {
                             var target = board.getAdjacentTile(avatarTile,
                                     event.getDirection("direction").get());
 
-                            if (target == this) { // someone is interacting with us
-                                if (avatar.containsEntity(this.key)) {
+                            if (target == getGame().getEntityLocation(this)) { // someone is interacting with us
+                                if (avatar.getEntities().filter(ent -> ent.getType().equals(keyType)).findFirst().isPresent()) {
                                     locked = false;
                                     this.setProperty("impassable", "false");
+                                    getGame().removeEntity(this);
                                 }
                             }
                         }
@@ -48,6 +49,9 @@ public class LockedDoor extends Tile implements EventListener {
         }
     }
 
+    public String getType() {
+        return "locked-door";
+    }
 
 }
 
