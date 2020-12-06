@@ -51,10 +51,53 @@
                     <constructor-arg name="character" value="@"/>
                     <constructor-arg name="properties">
                         <util:map>
-                            <entry key="description" value="door to aggenstein foyer"/>
+                            <entry key="description" value="door to outside"/>
                             <entry key="portal-destination-board" value="outside"/>
                             <entry key="portal-destination-row" value="0"/>
                             <entry key="portal-destination-column" value="8"/>
+                        </util:map>
+                    </constructor-arg>
+                </bean>
+                <bean id="outside-door" class="edu.missouriwestern.csmp.gg.base.Tile">
+                    <constructor-arg name="column" value="22"/>
+                    <constructor-arg name="row" value="3"/>
+                    <constructor-arg name="type" value="door"/>
+                    <constructor-arg name="character" value="@"/>
+                    <constructor-arg name="properties">
+                        <util:map>
+                            <entry key="description" value="door to spellcraft foyer"/>
+                            <entry key="portal-destination-board" value="spellcraft-foyer"/>
+                            <entry key="portal-destination-row" value="1"/>
+                            <entry key="portal-destination-column" value="0"/>
+                        </util:map>
+                    </constructor-arg>
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+
+
+    <bean class="edu.missouriwestern.csmp.gg.base.Board" id="spellcraft-foyer">
+        <constructor-arg name="name" value="spellcraft-foyer"/>
+        <constructor-arg name="charMap">
+            <bean id="spellcraft-foyer" class="edu.missouriwestern.csmp.gg.base.Board" factory-method="loadMap">
+                <constructor-arg value="spellcraft-foyer-map.txt"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg name="tileGenerators" ref="tile-generators"/>
+        <constructor-arg name="initialTiles">
+            <list>
+                <bean id="outside-door" class="edu.missouriwestern.csmp.gg.base.Tile">
+                    <constructor-arg name="column" value="0"/>
+                    <constructor-arg name="row" value="1"/>
+                    <constructor-arg name="type" value="door"/>
+                    <constructor-arg name="character" value="@"/>
+                    <constructor-arg name="properties">
+                        <util:map>
+                            <entry key="description" value="door to aggenstein foyer"/>
+                            <entry key="portal-destination-board" value="foyer"/>
+                            <entry key="portal-destination-row" value="3"/>
+                            <entry key="portal-destination-column" value="22"/>
                         </util:map>
                     </constructor-arg>
                 </bean>
@@ -70,7 +113,7 @@
             <list>
                 <ref bean="outside"/>
                 <ref bean="foyer"/>
-
+                <ref bean="spellcraft-foyer"/>
             </list>
         </constructor-arg>
     </bean>
@@ -163,41 +206,14 @@
             </bean>
         </constructor-arg>
     </bean>
-
-    <!--
-
-    <bean id="chest1" class="edu.missouriwestern.csmp.gg.mwsu.entities.Chest">
-        <constructor-arg ref="game"/>
-        <constructor-arg>
-            <bean factory-bean="aggensteinFoyer" factory-method="getTile">
-                <constructor-arg value = "10"/>
-                <constructor-arg value = "11"/>
-            </bean>
-        </constructor-arg>
-    </bean>
-
+<!--
     <bean id="locked-door-1" class="edu.missouriwestern.csmp.gg.mwsu.tiles.LockedDoor">
         <constructor-arg ref="aggensteinFoyer"/>
         <constructor-arg value = "28"/>
         <constructor-arg value = "11"/>
         <constructor-arg ref="SpellcraftKey"/>
     </bean>
-
-
-
-    <bean id="SpellcraftKey" class="edu.missouriwestern.csmp.gg.mwsu.entities.SpellcraftKey">
-        <constructor-arg index="0" ref="game"/>
-        <constructor-arg index="1" ref="chest1"/>
-    </bean>
-    <bean id="foyer-map" class="edu.missouriwestern.csmp.gg.base.Board" factory-method="loadMap">
-        <constructor-arg value="foyer-map.txt"/>
-    </bean>
-    <bean id="aggensteinFoyer-map" class="edu.missouriwestern.csmp.gg.base.Board" factory-method="loadMap">
-        <constructor-arg value="aggensteinFoyer-map.txt"/>
-    </bean>
-    <bean id="spellcraftFoyer-map" class="edu.missouriwestern.csmp.gg.base.Board" factory-method="loadMap">
-        <constructor-arg value="spellcraftFoyer-map.txt"/>
-    </bean>
-
 /-->
+
+
 </beans>
