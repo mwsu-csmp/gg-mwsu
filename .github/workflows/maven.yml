@@ -19,10 +19,9 @@ jobs:
          
     - name: 'Create settings.xml'
       env:
-        GITHUB_USERNAME: jmorwick
         GITHUB_TOKEN: ${{ secrets.ACTIONSTOKEN }}
-      uses: whelk-io/maven-settings-xml-action@v14
-      with:
-        servers: '[{"id": "github", "username": "${{ env.GITHUB_USERNAME }}", "password": "${{ env.GITHUB_PASSWORD }}"}]'
+      run: |
+        touch ~/.m2/settings.xml
+        echo '<settings><servers><server><id>github</id><username>$(echo "$GITHUB_REPOSITORY" | awk -F / '{print $1}')</username><password>${{ env.GITHUB_TOKEN }}</password></server></servers></settings>' > ~/.m2/settings.xml
     - name: Build
       run: mvn install
