@@ -40,14 +40,7 @@
             <url>https://packagecloud.io/jbkm/mwsu-staging/maven2</url>
             <releases><enabled>true</enabled></releases>
             <snapshots><enabled>false</enabled></snapshots>
-        </repository>
-        <repository>
-            <id>github</id>
-            <name>GitHub mwsu-csmp Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/mwsu-csmp/gg-game-api</url>
-            <releases><enabled>true</enabled></releases>
-            <snapshots><enabled>false</enabled></snapshots>
-        </repository>     
+        </repository>   
     </repositories>
 
     <dependencies>
