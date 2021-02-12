@@ -1,15 +1,11 @@
-# This workflow will build a Java project with Maven
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
-
-name: Java CI with Maven
+name: Maven Install
 
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 jobs:
+    
   Maven_Install:
 
     runs-on: ubuntu-latest
@@ -20,5 +16,12 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: Build with Maven
-      run: mvn install
+ 
+    - name: 'Create settings.xml'
+      uses: whelk-io/maven-settings-xml-action@v4
+      env:
+        GITHUB_TOKEN: ${{ secrets.ACTIONSTOKEN }}       
+      with:
+          servers: '[{"id": "github", "password": "${{ env.GITHUB_PASSWORD }}"}]'
+    - name: Build
+      run: mvn install  
