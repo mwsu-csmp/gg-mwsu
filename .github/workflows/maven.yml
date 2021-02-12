@@ -10,7 +10,7 @@ on:
     branches: [ master ]
 
 jobs:
-  Maven Install:
+  Maven_Install:
 
     runs-on: ubuntu-latest
 
