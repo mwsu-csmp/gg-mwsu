@@ -1,4 +1,4 @@
-name: Maven Install
+name: Maven_Install_Package_Deploy
 
 on:
   push:
@@ -23,7 +23,7 @@ jobs:
       run: |
         touch ~/.m2/settings.xml
         echo '<settings><servers><server><id>github</id><username>$(echo "$GITHUB_REPOSITORY" | awk -F / '{print $1}')</username><password>${{ env.GITHUB_TOKEN }}</password></server></servers></settings>' > ~/.m2/settings.xml
-        REPO="gh::default::https://maven.pkg.github.com/${GITHUB_REPOSITORY}"
+        REPO="github::default::https://maven.pkg.github.com/${GITHUB_REPOSITORY}"
     - name: Maven Install
       run: mvn install
     - name: Maven Package
