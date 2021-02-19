@@ -12,7 +12,7 @@ jobs:
     - name: Generate settings.xml for Maven Builds
       uses: whelk-io/maven-settings-xml-action@v14
       with:
-        repositories: '{ "id": "mwsu-csmp-gg-game-api", "url": "https://maven.pkg.github.com/mwsu-csmp/gg-game-api" }]'
+        repositories: '[{ "id": "mwsu-csmp-gg-game-api", "url": "https://maven.pkg.github.com/mwsu-csmp/gg-game-api" }]'
         servers: '[{ "id": "mwsu-csmp-gg-game-api", "username": "${{ secrets.ACTIONSUSERNAME }}", "password": "${{ secrets.ACTIONSTOKEN }}" }]'   
     
  install:
