@@ -14,7 +14,7 @@ jobs:
     - name: Maven package
       run: |
           mkdir -p ~/.m2
-          echo "<settings><servers><server><id>github</id><username>jmorwick</username><password>\${env.GITHUB_TOKEN}</password></server></servers></settings>" > ~/.m2/settings.xml
+          echo "<settings><activeProfiles><activeProfile>github</activeProfile></activeProfiles><profiles><profile><id>github</id><repositories><repository><id>github</id><name>GitHub mwsu-csmp Apache Maven Packages</name><url>https://maven.pkg.github.com/mwsu-csmp/gg-game-api</url></repository><repository><id>central</id><url>https://repo1.maven.org/maven2</url><releases><enabled>true</enabled></releases><snapshots><enabled>true</enabled></snapshots></repository></repositories></profile></profiles></settings>" > ~/.m2/settings.xml
           REPO="github::default::https://maven.pkg.github.com/${GITHUB_REPOSITORY}"
           mvn --file pom.xml package
       
