@@ -28,7 +28,7 @@
 
     <distributionManagement>
         <repository>
-          <id>github</id>
+          <id>mwsu-csmp-gg-mwsu</id>
           <name>GitHub mwsu-csmp Apache Maven Packages</name>
           <url>https://maven.pkg.github.com/mwsu-csmp/gg-mwsu</url>
         </repository>   
@@ -42,7 +42,7 @@
             <snapshots><enabled>false</enabled></snapshots>
         </repository>   
         <repository>
-            <id>github</id>
+            <id>mwsu-csmp-gg-game-api</id>
             <name>GitHub mwsu-csmp Apache Maven Packages</name>
             <url>https://maven.pkg.github.com/mwsu-csmp/gg-game-api</url>
             <releases><enabled>true</enabled></releases>
