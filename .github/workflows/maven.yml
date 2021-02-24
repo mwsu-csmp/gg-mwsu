@@ -15,6 +15,8 @@ jobs:
       with:
         repositories: '[ {"id": "mwsu-csmp-gg-mwsu", "url": "https://maven.pkg.github.com/mwsu-csmp/gg-mwsu"},{ "id": "mwsu-csmp-gg-game-api", "url": "https://maven.pkg.github.com/mwsu-csmp/gg-game-api", "releases": { "enabled": "true" }, "snapshots": { "enabled": "false" } }]'
         servers: '[{ "id": "mwsu-csmp-gg-game-api", "username": "${{ secrets.ACTIONSUSERNAME }}", "password": "${{ secrets.ACTIONSTOKEN }}" },{ "id": "mwsu-csmp-gg-mwsu", "username": "${{ secrets.ACTIONSUSERNAME }}", "password": "${{ secrets.ACTIONSTOKEN }}" }]' 
+    - name: Generate SettingSecurity.xml
+      run: echo "<settingsSecurity><master>${secrets.ACTIONSUSERNAME}</master></settingsSecurity>" > /root/.m2/settings-security.xml      
         
   maven_install:
     runs-on: ubuntu-latest
