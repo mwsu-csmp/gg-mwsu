@@ -22,4 +22,6 @@ jobs:
     - name: maven_intall 
       run: mvn -X install       
     - name: Maven Deploy
-      run:  mvn deploy -DaltReleaseDeploymentRepository="https://maven.pkg.github.com/mwsu-csmp/gg-mwsu" -DaltSnapshotDeploymentRepository="https://maven.pkg.github.com/mwsu-csmp/gg-mwsu"
+      run: |
+        REPO="mwsu-csmp-gg-mwsu::default::https://maven.pkg.github.com/mwsu-csmp/gg-mwsu"
+        mvn deploy -DaltReleaseDeploymentRepository="https://maven.pkg.github.com/mwsu-csmp/gg-mwsu" -DaltSnapshotDeploymentRepository="https://maven.pkg.github.com/mwsu-csmp/gg-mwsu"
