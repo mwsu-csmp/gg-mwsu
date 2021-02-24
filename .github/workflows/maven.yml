@@ -13,8 +13,8 @@ jobs:
     - name: Generate settings.xml for Maven Builds
       uses: whelk-io/maven-settings-xml-action@v14
       with:
-        repositories: '[{ "id": "mwsu-csmp-gg-game-api", "url": "https://maven.pkg.github.com/mwsu-csmp/gg-game-api", "releases": { "enabled": "true" }, "snapshots": { "enabled": "false" } }]'
-        servers: '[{ "id": "mwsu-csmp-gg-game-api", "username": "${{ secrets.ACTIONSUSERNAME }}", "password": "${{ secrets.ACTIONSTOKEN }}" }]' 
+        repositories: '[ "id": "mwsu-csmp-gg-mwsu", "url": "https://maven.pkg.github.com/mwsu-csmp/gg-mwsu",{ "id": "mwsu-csmp-gg-game-api", "url": "https://maven.pkg.github.com/mwsu-csmp/gg-game-api", "releases": { "enabled": "true" }, "snapshots": { "enabled": "false" } }]'
+        servers: '[{ "id": "mwsu-csmp-gg-game-api", "username": "${{ secrets.ACTIONSUSERNAME }}", "password": "${{ secrets.ACTIONSTOKEN }}" },{ "id": "mwsu-csmp-gg-mwsu", "username": "${{ secrets.ACTIONSUSERNAME }}", "password": "${{ secrets.ACTIONSTOKEN }}" }]' 
         
   maven_install:
     runs-on: ubuntu-latest
@@ -26,7 +26,7 @@ jobs:
       with:
           java-version: 11
     - name: Maven Install
-      run: mvn --file pom.xml package
+      run: mvn -X install
       
   deploy:
     runs-on: ubuntu-latest
