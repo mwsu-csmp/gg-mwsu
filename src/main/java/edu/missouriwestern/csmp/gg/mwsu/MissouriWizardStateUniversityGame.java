@@ -17,7 +17,7 @@ public class MissouriWizardStateUniversityGame extends Game {
                                              EventListener eventPropagator,
                                              Consumer<EventListener> incomingEventCallback,
                                              Board ... boards) {
-        super(dataStore, eventPropagator, incomingEventCallback, boards);
+        super("mwsu", dataStore, eventPropagator, incomingEventCallback, boards);
     }
 
     @Override
