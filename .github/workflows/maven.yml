@@ -1,8 +1,9 @@
-name: Maven_Install_Package_Deploy
+name: Maven deploy package on release
 
 on:
-  push:
-    branches: [ master ]
+  release:
+    types:
+      - created
 
 jobs:
   Deploy:
