@@ -1,0 +1,28 @@
+name: Maven deploy package on release
+
+on:
+  release:
+    types:
+      - created
+
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Set up JDK 11
+      uses: actions/setup-java@v1
+      with:
+          java-version: 11
+    - uses: actions/checkout@v1
+    - name: Generate settings.xml for Maven Builds
+      uses: whelk-io/maven-settings-xml-action@v14
+      with:
+        repositories: '[ {"id": "mwsu-csmp-gg-mwsu", "url": "https://maven.pkg.github.com/mwsu-csmp/gg-mwsu"},{ "id": "mwsu-csmp-gg-game-api", "url": "https://maven.pkg.github.com/mwsu-csmp/gg-game-api", "releases": { "enabled": "true" }, "snapshots": { "enabled": "false" } }]'
+        servers: '[{ "id": "mwsu-csmp-gg-game-api", "username": "${{ secrets.ACTIONSUSERNAME }}", "password": "${{ secrets.ACTIONSTOKEN }}" },{ "id": "mwsu-csmp-gg-mwsu", "username": "${{ secrets.ACTIONSUSERNAME }}", "password": "${{ secrets.ACTIONSTOKEN }}" }]' 
+    - name: maven_intall 
+      run: mvn -X install       
+    - name: Maven Deploy
+      run: |
+        REPO="mwsu-csmp-gg-mwsu::default::https://maven.pkg.github.com/${GITHUB_REPOSITORY}"
+        mvn deploy -DaltReleaseDeploymentRepository="${REPO}" -DaltSnapshotDeploymentRepository="${REPO}"
