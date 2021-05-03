@@ -122,7 +122,7 @@ public class ShopKeeper extends Entity implements EventListener, Runnable {
     }
 
     public String getType() {
-        return "npc";
+        return "guardian";
     }
 
     public String toString() {

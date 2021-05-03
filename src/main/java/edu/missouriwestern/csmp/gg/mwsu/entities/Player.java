@@ -85,6 +85,7 @@ public class Player extends Entity implements Agent {
         getGame().moveEntity(this, location);
     }
 
+    @Override
     public String getType() {
         return getRole();
     }

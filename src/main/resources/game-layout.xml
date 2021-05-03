@@ -123,7 +123,7 @@
         <entry key="#">
             <bean class="edu.missouriwestern.csmp.gg.base.Tile" factory-method="getGenerator">
                 <constructor-arg name="character" value="#"/>
-                <constructor-arg name="type" value="wall"/>
+                <constructor-arg name="type" value="cavewall"/>
                 <constructor-arg name="properties">
                     <map>
                         <entry key="impassable" value="true"/>
@@ -157,7 +157,7 @@
         <entry key="-">
             <bean class="edu.missouriwestern.csmp.gg.base.Tile" factory-method="getGenerator">
                 <constructor-arg name="character" value="-"/>
-                <constructor-arg name="type" value="floor"/>
+                <constructor-arg name="type" value="cavefloor"/>
                 <constructor-arg name="properties">
                     <map>
                         <entry key="description" value="just a normal floor tile"/>

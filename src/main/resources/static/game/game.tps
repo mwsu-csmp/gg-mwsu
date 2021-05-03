@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>5.4.0</string>
+        <string>5.5.0</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -181,17 +181,27 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">chest-closed.png</key>
-            <key type="filename">chest-open.png</key>
-            <key type="filename">key.png</key>
-            <key type="filename">merchant-wings.png</key>
-            <key type="filename">merchant.png</key>
-            <key type="filename">player-boy-left.png</key>
-            <key type="filename">player-boy-mid.png</key>
-            <key type="filename">player-boy-right.png</key>
-            <key type="filename">player-girl-left.png</key>
-            <key type="filename">player-girl-mid.png</key>
-            <key type="filename">player-girl-right.png</key>
+            <key type="filename">entity-chest.png</key>
+            <key type="filename">entity-guardian[heading=east,animation=moving1].png</key>
+            <key type="filename">entity-guardian[heading=east,animation=moving2].png</key>
+            <key type="filename">entity-guardian[heading=north,animation=moving1].png</key>
+            <key type="filename">entity-guardian[heading=north,animation=moving2].png</key>
+            <key type="filename">entity-guardian[heading=south,animation=moving1].png</key>
+            <key type="filename">entity-guardian[heading=south,animation=moving2].png</key>
+            <key type="filename">entity-guardian[heading=west,animation=moving1].png</key>
+            <key type="filename">entity-guardian[heading=west,animation=moving2].png</key>
+            <key type="filename">entity-player[heading=east,animation=Idle].png</key>
+            <key type="filename">entity-player[heading=east,animation=moving1].png</key>
+            <key type="filename">entity-player[heading=east,animation=moving2].png</key>
+            <key type="filename">entity-player[heading=north,animation=Idle].png</key>
+            <key type="filename">entity-player[heading=north,animation=moving1].png</key>
+            <key type="filename">entity-player[heading=north,animation=moving2].png</key>
+            <key type="filename">entity-player[heading=south,animation=Idle].png</key>
+            <key type="filename">entity-player[heading=south,animation=moving1].png</key>
+            <key type="filename">entity-player[heading=south,animation=moving2].png</key>
+            <key type="filename">entity-player[heading=west,animation=Idle].png</key>
+            <key type="filename">entity-player[heading=west,animation=moving1].png</key>
+            <key type="filename">entity-player[heading=west,animation=moving2].png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -200,52 +210,86 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>16,16,32,32</rect>
+                <rect>28,28,55,55</rect>
                 <key>scale9Paddings</key>
-                <rect>16,16,32,32</rect>
+                <rect>28,28,55,55</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">entity-player.png</key>
-            <key type="filename">entity.png</key>
-            <key type="filename">tile-door.png</key>
-            <key type="filename">tile-grass.png</key>
-            <key type="filename">tile-wall.png</key>
-            <key type="filename">tile.png</key>
+            <key type="filename">entity-key.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
+                <point_f>0,0</point_f>
                 <key>spriteScale</key>
                 <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>16,16,32,32</rect>
+                <rect>20,20,40,40</rect>
                 <key>scale9Paddings</key>
-                <rect>16,16,32,32</rect>
+                <rect>20,20,40,40</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">tile-caveentry.png</key>
+            <key type="filename">tile-cavefloor.png</key>
+            <key type="filename">tile-cavewall.png</key>
+            <key type="filename">tile-dirt.png</key>
+            <key type="filename">tile-dirttograss.png</key>
+            <key type="filename">tile-grass.png</key>
+            <key type="filename">tile-grasstodirt.png</key>
+            <key type="filename">tile-grasstosand.png</key>
+            <key type="filename">tile-sand.png</key>
+            <key type="filename">tile-sandtograss.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0,0</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>32,32,64,64</rect>
+                <key>scale9Paddings</key>
+                <rect>32,32,64,64</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
         </map>
         <key>fileList</key>
         <array>
+            <filename>entity-player[heading=north,animation=Idle].png</filename>
+            <filename>entity-player[heading=north,animation=moving1].png</filename>
+            <filename>entity-player[heading=north,animation=moving2].png</filename>
+            <filename>entity-player[heading=south,animation=Idle].png</filename>
+            <filename>entity-player[heading=south,animation=moving1].png</filename>
+            <filename>entity-player[heading=south,animation=moving2].png</filename>
+            <filename>tile-cavewall.png</filename>
             <filename>tile-grass.png</filename>
-            <filename>tile-wall.png</filename>
-            <filename>tile-door.png</filename>
-            <filename>entity-player.png</filename>
-            <filename>tile.png</filename>
-            <filename>entity.png</filename>
-            <filename>chest-closed.png</filename>
-            <filename>key.png</filename>
-            <filename>merchant.png</filename>
-            <filename>merchant-wings.png</filename>
-            <filename>player-girl-right.png</filename>
-            <filename>player-girl-mid.png</filename>
-            <filename>player-girl-left.png</filename>
-            <filename>player-boy-right.png</filename>
-            <filename>player-boy-mid.png</filename>
-            <filename>player-boy-left.png</filename>
-            <filename>chest-open.png</filename>
+            <filename>tile-grasstosand.png</filename>
+            <filename>tile-sand.png</filename>
+            <filename>tile-sandtograss.png</filename>
+            <filename>entity-player[heading=east,animation=Idle].png</filename>
+            <filename>entity-player[heading=east,animation=moving1].png</filename>
+            <filename>entity-player[heading=east,animation=moving2].png</filename>
+            <filename>entity-player[heading=west,animation=Idle].png</filename>
+            <filename>entity-player[heading=west,animation=moving1].png</filename>
+            <filename>entity-player[heading=west,animation=moving2].png</filename>
+            <filename>entity-chest.png</filename>
+            <filename>entity-guardian[heading=east,animation=moving1].png</filename>
+            <filename>entity-guardian[heading=east,animation=moving2].png</filename>
+            <filename>entity-guardian[heading=north,animation=moving1].png</filename>
+            <filename>entity-guardian[heading=north,animation=moving2].png</filename>
+            <filename>entity-guardian[heading=south,animation=moving1].png</filename>
+            <filename>entity-guardian[heading=south,animation=moving2].png</filename>
+            <filename>entity-guardian[heading=west,animation=moving1].png</filename>
+            <filename>entity-guardian[heading=west,animation=moving2].png</filename>
+            <filename>entity-key.png</filename>
+            <filename>tile-caveentry.png</filename>
+            <filename>tile-dirt.png</filename>
+            <filename>tile-dirttograss.png</filename>
+            <filename>tile-grasstodirt.png</filename>
+            <filename>tile-cavefloor.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

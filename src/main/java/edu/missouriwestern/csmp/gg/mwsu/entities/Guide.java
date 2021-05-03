@@ -79,7 +79,7 @@ public class Guide extends Entity implements EventListener, Runnable {
     }
 
     public String getType() {
-        return "npc";
+        return "guardian";
     }
 
     public String toString() {
