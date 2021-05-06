@@ -50,7 +50,7 @@ public class LockedDoor extends Entity implements EventListener {
     }
 
     public String getType() {
-        return "locked-door";
+        return "caveentry";
     }
 
 }

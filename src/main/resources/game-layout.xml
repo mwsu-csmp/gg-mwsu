@@ -17,8 +17,8 @@
             <list>
                 <bean id="outside-door" class="edu.missouriwestern.csmp.gg.base.Tile">
                     <constructor-arg name="column" value="8"/>
-                    <constructor-arg name="row" value="0"/>
-                    <constructor-arg name="type" value="door"/>
+                    <constructor-arg name="row" value="1"/>
+                    <constructor-arg name="type" value="caveentry"/>
                     <constructor-arg name="character" value="@"/>
                     <constructor-arg name="properties">
                         <util:map>
@@ -47,13 +47,13 @@
                 <bean id="outside-door" class="edu.missouriwestern.csmp.gg.base.Tile">
                     <constructor-arg name="column" value="11"/>
                     <constructor-arg name="row" value="16"/>
-                    <constructor-arg name="type" value="door"/>
+                    <constructor-arg name="type" value="cavefloor"/>
                     <constructor-arg name="character" value="@"/>
                     <constructor-arg name="properties">
                         <util:map>
                             <entry key="description" value="door to outside"/>
                             <entry key="portal-destination-board" value="outside"/>
-                            <entry key="portal-destination-row" value="0"/>
+                            <entry key="portal-destination-row" value="1"/>
                             <entry key="portal-destination-column" value="8"/>
                         </util:map>
                     </constructor-arg>
@@ -61,8 +61,8 @@
                 <bean id="outside-door" class="edu.missouriwestern.csmp.gg.base.Tile">
                     <constructor-arg name="column" value="22"/>
                     <constructor-arg name="row" value="3"/>
-                    <constructor-arg name="type" value="door"/>
-                    <constructor-arg name="character" value="@"/>
+                    <constructor-arg name="type" value="caveentry"/>
+                    <constructor-arg name="character" value="x"/>
                     <constructor-arg name="properties">
                         <util:map>
                             <entry key="description" value="door to spellcraft foyer"/>
@@ -90,7 +90,7 @@
                 <bean id="outside-door" class="edu.missouriwestern.csmp.gg.base.Tile">
                     <constructor-arg name="column" value="0"/>
                     <constructor-arg name="row" value="1"/>
-                    <constructor-arg name="type" value="door"/>
+                    <constructor-arg name="type" value="caveentry"/>
                     <constructor-arg name="character" value="@"/>
                     <constructor-arg name="properties">
                         <util:map>
@@ -127,6 +127,17 @@
                 <constructor-arg name="properties">
                     <map>
                         <entry key="impassable" value="true"/>
+                    </map>
+                </constructor-arg>
+            </bean>
+        </entry>
+        <entry key="^">
+            <bean class="edu.missouriwestern.csmp.gg.base.Tile" factory-method="getGenerator">
+                <constructor-arg name="character" value="^"/>
+                <constructor-arg name="type" value="sand"/>
+                <constructor-arg name="properties">
+                    <map>
+                        <entry key="description" value="just a normal sand tile"/>
                     </map>
                 </constructor-arg>
             </bean>
