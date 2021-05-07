@@ -1,0 +1,60 @@
+{"frames": {
+
+"entitiy-item[object=potion2].png":
+{
+	"frame": {"x":0,"y":0,"w":80,"h":80},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":80,"h":80},
+	"sourceSize": {"w":80,"h":80}
+},
+"entity-chest.png":
+{
+	"frame": {"x":80,"y":0,"w":110,"h":110},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":110,"h":110},
+	"sourceSize": {"w":110,"h":110}
+},
+"entity-item[object=fruit].png":
+{
+	"frame": {"x":190,"y":0,"w":80,"h":80},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":80,"h":80},
+	"sourceSize": {"w":80,"h":80}
+},
+"entity-item[object=potion].png":
+{
+	"frame": {"x":270,"y":0,"w":80,"h":80},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":80,"h":80},
+	"sourceSize": {"w":80,"h":80}
+},
+"entity-key.png":
+{
+	"frame": {"x":350,"y":0,"w":80,"h":80},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":80,"h":80},
+	"sourceSize": {"w":80,"h":80}
+},
+"entity.png":
+{
+	"frame": {"x":430,"y":0,"w":128,"h":128},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":128,"h":128},
+	"sourceSize": {"w":128,"h":128}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "entity-misc-spritesheet.png",
+	"format": "RGBA8888",
+	"size": {"w":558,"h":128},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:269116d9c4de39e07f871e5bee243817:9541a3c58a61fbd868264e66faa76b23:71b3fcf10e818047af9a0ba0e222b322$"
+}
+}

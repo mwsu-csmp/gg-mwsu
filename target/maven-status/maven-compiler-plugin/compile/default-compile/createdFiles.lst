@@ -1,0 +1,8 @@
+edu\missouriwestern\csmp\gg\mwsu\entities\Guide.class
+edu\missouriwestern\csmp\gg\mwsu\entities\Chest.class
+edu\missouriwestern\csmp\gg\mwsu\entities\Wizard.class
+edu\missouriwestern\csmp\gg\mwsu\entities\LockedDoor.class
+edu\missouriwestern\csmp\gg\mwsu\entities\Player.class
+edu\missouriwestern\csmp\gg\mwsu\MissouriWizardStateUniversityGame.class
+edu\missouriwestern\csmp\gg\mwsu\entities\SpellcraftKey.class
+edu\missouriwestern\csmp\gg\mwsu\entities\ShopKeeper.class
