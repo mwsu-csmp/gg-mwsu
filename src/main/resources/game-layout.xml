@@ -53,7 +53,7 @@
                         <util:map>
                             <entry key="description" value="door to outside"/>
                             <entry key="portal-destination-board" value="outside"/>
-                            <entry key="portal-destination-row" value="1"/>
+                            <entry key="portal-destination-row" value="3"/>
                             <entry key="portal-destination-column" value="8"/>
                         </util:map>
                     </constructor-arg>
@@ -142,14 +142,36 @@
                 </constructor-arg>
             </bean>
         </entry>
+        <entry key="/">
+            <bean class="edu.missouriwestern.csmp.gg.base.Tile" factory-method="getGenerator">
+                <constructor-arg name="character" value="/"/>
+                <constructor-arg name="type" value="grasstosand"/>
+                <constructor-arg name="properties">
+                    <map>
+                        <entry key="description" value="just a normal sand tile"/>
+                    </map>
+                </constructor-arg>
+            </bean>
+        </entry>
+        <entry key="\">
+            <bean class="edu.missouriwestern.csmp.gg.base.Tile" factory-method="getGenerator">
+                <constructor-arg name="character" value="\"/>
+                <constructor-arg name="type" value="sandtograss"/>
+                <constructor-arg name="properties">
+                    <map>
+                        <entry key="description" value="just a normal sand tile"/>
+                    </map>
+                </constructor-arg>
+            </bean>
+        </entry>
         <entry key="%">
             <bean class="edu.missouriwestern.csmp.gg.base.Tile" factory-method="getGenerator">
                 <constructor-arg name="character" value="%"/>
-                <constructor-arg name="type" value="countertop"/>
+                <constructor-arg name="type" value="counter"/>
                 <constructor-arg name="properties">
                     <map>
+                        <entry key="description" value="bar"/>
                         <entry key="impassable" value="true"/>
-                        <entry key="description" value="countertop"/>
                     </map>
                 </constructor-arg>
             </bean>
@@ -178,7 +200,7 @@
         </entry>
         <entry key="*">
             <bean class="edu.missouriwestern.csmp.gg.base.Tile" factory-method="getGenerator">
-                <constructor-arg name="character" value=" "/>
+                <constructor-arg name="character" value="^"/>
                 <constructor-arg name="type" value="player-spawn"/>
                 <constructor-arg name="properties">
                     <map>
