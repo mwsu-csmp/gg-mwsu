@@ -2,7 +2,9 @@ package edu.missouriwestern.csmp.gg.mwsu.entities;
 
 import edu.missouriwestern.csmp.gg.base.*;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Logger;
 
 public class Guide extends Entity implements EventListener, Runnable {
@@ -12,7 +14,7 @@ public class Guide extends Entity implements EventListener, Runnable {
             "Start by searching around for Items!"};
 
     private int waitStep = 0;
-
+    private Set<Player> payouts = new HashSet<>();
     private final int MOVE_EVERY = 10;
 
 
@@ -35,7 +37,7 @@ public class Guide extends Entity implements EventListener, Runnable {
             switch(event.getString("command")) {
                 case "INTERACT":
                     var player = getGame().getAgent(event.getString("username"));
-                    if (player instanceof Player) { // TODO: this cast sucks, shouldn't be tied to client, rethink approach
+                    if (player instanceof Player) {
                         var avatar = ((Player) player);
                         var avatarLocation = getGame().getEntityLocation(avatar);
                         if (avatarLocation instanceof Tile) {
@@ -43,6 +45,15 @@ public class Guide extends Entity implements EventListener, Runnable {
                             var board = tile.getBoard();
                             var target = board.getAdjacentTile(tile, event.getDirection("direction").get());
                             if (target == getGame().getEntityLocation(this)) { // someone is interacting with us
+
+                                // give new players some money
+                                if(!payouts.contains(avatar)) {
+                                    if(!avatar.hasProperty("gold")) {
+                                        avatar.setProperty("gold", 200);
+                                    }
+                                    payouts.add(avatar);
+                                }
+
                                 getGame().propagateEvent(new Event(getGame(), "speech",
                                         Map.of("entity", ""+this.getID(),
                                         "message", messages[(int) (Math.random() * messages.length)])));

@@ -239,6 +239,15 @@
             </bean>
         </constructor-arg>
     </bean>
+    <bean id="wizard" class="edu.missouriwestern.csmp.gg.mwsu.entities.Wizard">
+        <constructor-arg ref="game"/>
+        <constructor-arg>
+            <bean factory-bean="spellcraft-foyer" factory-method="getTile">
+                <constructor-arg value = "6"/>
+                <constructor-arg value = "6"/>
+            </bean>
+        </constructor-arg>
+    </bean>
 
     <bean id="locked-door-1" class="edu.missouriwestern.csmp.gg.mwsu.entities.LockedDoor">
         <constructor-arg ref="game"/>

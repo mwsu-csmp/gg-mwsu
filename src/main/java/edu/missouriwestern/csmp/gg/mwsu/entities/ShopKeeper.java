@@ -33,33 +33,45 @@ public class ShopKeeper extends Entity implements EventListener, Runnable {
             case "command":  // see if someone wants you to talk to them
                 switch(event.getString("command").toLowerCase()) {
                     case "speech":
-                        var message = event.getString("message");
-                        if(message.startsWith("buy ")) {
-                            var item = message.substring(4);
-                            switch (item) {
-                                case "key":
-                                    var myLocation = getGame().getEntityLocation(this);
-                                    if(!(myLocation instanceof Tile)) return;  // need to be on the map to interact
-                                    var board = ((Tile) myLocation).getBoard();
-                                    var dest = board.getAdjacentTile((Tile)myLocation, SOUTH);
-                                    dest = board.getAdjacentTile(dest, SOUTH);
-                                    dest = board.getAdjacentTile(dest, SOUTH);
-                                    var chest = new Chest(getGame(), dest);
-                                    var key = new SpellcraftKey(getGame(), chest);
-                                    getGame().propagateEvent(new Event(getGame(), "speech",
-                                            Map.of("entity", ""+this.getID(),
-                                                    "message", "your purchase is in the chest")));
-                                    break;
-                                default:
-                                    getGame().propagateEvent(new Event(getGame(), "speech",
-                                            Map.of("entity", ""+this.getID(),
-                                                    "message", "sorry, all out of "+item)));
+                        var p = getGame().getAgent(event.getString("username"));
+                        if (p instanceof Player) {
+                            var avatar = ((Player) p);
 
+                            if(avatar.hasProperty("gold") && avatar.getInteger("gold") >= 100) {
+                                var message = event.getString("message");
+                                if (message.startsWith("buy ")) {
+                                    var item = message.substring(4);
+                                    switch (item) {
+                                        case "key":
+                                            var myLocation = getGame().getEntityLocation(this);
+                                            if (!(myLocation instanceof Tile)) return;  // need to be on the map to interact
+                                            var board = ((Tile) myLocation).getBoard();
+                                            var dest = board.getAdjacentTile((Tile) myLocation, SOUTH);
+                                            dest = board.getAdjacentTile(dest, SOUTH);
+                                            dest = board.getAdjacentTile(dest, SOUTH);
+                                            var chest = new Chest(getGame(), dest);
+                                            var key = new SpellcraftKey(getGame(), chest);
+                                            avatar.setProperty("gold", avatar.getInteger("gold") - 100);
+                                            getGame().propagateEvent(new Event(getGame(), "speech",
+                                                    Map.of("entity", "" + this.getID(),
+                                                            "message", "your purchase is in the chest")));
+                                            break;
+                                        default:
+                                            getGame().propagateEvent(new Event(getGame(), "speech",
+                                                    Map.of("entity", "" + this.getID(),
+                                                            "message", "sorry, all out of " + item)));
+                                    }
+                                }
+                            } else {
+                                getGame().propagateEvent(new Event(getGame(), "speech",
+                                        Map.of("entity", "" + this.getID(),
+                                                "message", "you need more money! Talk to the guide")));
                             }
                         }
+                        break;
                     case "interact":
                         var player = getGame().getAgent(event.getString("username"));
-                        if (player instanceof Player) { // TODO: this cast sucks, shouldn't be tied to client, rethink approach
+                        if (player instanceof Player) {
                             var avatar = ((Player) player);
                             var avatarLocation = getGame().getEntityLocation(avatar);
                             if (avatarLocation instanceof Tile) {
