@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 
 public class Guide extends Entity implements EventListener, Runnable {
 
-    private static Logger logger = Logger.getLogger(Guide.class.getCanonicalName());
     private final String[] messages = {"Welcome to GG-Project!",
             "Find the key in order to reach the Spellcraft Area!",
             "Start by searching around for Items!"};
@@ -35,7 +34,6 @@ public class Guide extends Entity implements EventListener, Runnable {
             case "command":  // see if someone wants you to talk to them
             switch(event.getString("command")) {
                 case "INTERACT":
-                    logger.info("Interact was pressed");
                     var player = getGame().getAgent(event.getString("username"));
                     if (player instanceof Player) { // TODO: this cast sucks, shouldn't be tied to client, rethink approach
                         var avatar = ((Player) player);
@@ -63,7 +61,6 @@ public class Guide extends Entity implements EventListener, Runnable {
         waitStep++;
         if(waitStep % MOVE_EVERY != 0) return;
 
-        logger.info("guide walking around");
         var direction = Direction.values()[(int) (Math.random() * 4)];
         if ((getGame().getEntityLocation(this) instanceof Tile)) {
             var location = (Tile) getGame().getEntityLocation(this);

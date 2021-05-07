@@ -11,8 +11,6 @@ import java.util.logging.Logger;
 @Permanent
 public class Player extends Entity implements Agent {
 
-    private static Logger logger = Logger.getLogger(Player.class.getCanonicalName());
-
     private final String id;
 
     public Player(Game game, String id) {

@@ -10,9 +10,6 @@ import java.util.logging.Logger;
 import static edu.missouriwestern.csmp.gg.base.Direction.*;
 
 public class ShopKeeper extends Entity implements EventListener, Runnable {
-
-    private static Logger logger = Logger.getLogger(Guide.class.getCanonicalName());
-
     private int waitStep = 0;
 
     private final int MOVE_EVERY = 30;
@@ -53,10 +50,14 @@ public class ShopKeeper extends Entity implements EventListener, Runnable {
                                             Map.of("entity", ""+this.getID(),
                                                     "message", "your purchase is in the chest")));
                                     break;
+                                default:
+                                    getGame().propagateEvent(new Event(getGame(), "speech",
+                                            Map.of("entity", ""+this.getID(),
+                                                    "message", "sorry, all out of "+item)));
+
                             }
                         }
                     case "interact":
-                        logger.info("Interact was pressed");
                         var player = getGame().getAgent(event.getString("username"));
                         if (player instanceof Player) { // TODO: this cast sucks, shouldn't be tied to client, rethink approach
                             var avatar = ((Player) player);
@@ -105,8 +106,6 @@ public class ShopKeeper extends Entity implements EventListener, Runnable {
     public void run() {
         waitStep++;
         if(waitStep % MOVE_EVERY != 0) return;
-
-        logger.info("shopkeeper pacing around");
         var direction = Direction.values()[(int) (Math.random() * 4)];
         if ((getGame().getEntityLocation(this) instanceof Tile)) {
             var location = (Tile) getGame().getEntityLocation(this);

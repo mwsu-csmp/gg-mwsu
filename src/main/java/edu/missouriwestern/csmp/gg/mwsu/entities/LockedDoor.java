@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 public class LockedDoor extends Entity implements EventListener {
-    private static Logger logger = Logger.getLogger(LockedDoor.class.getCanonicalName());
     private final String[] messages = {"Unlocked the door"};
     private boolean locked = true;
     private String keyType;
@@ -24,7 +23,6 @@ public class LockedDoor extends Entity implements EventListener {
         switch (event.getType()) {
             case "command":
                 if (event.getProperty("command").equals("INTERACT")) {
-                    logger.info("Interact was pressed");
                     var player = getGame().getAgent(event.getString("username"));
                     if (player instanceof Player) {
                         var avatar = ((Player) player);

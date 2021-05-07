@@ -3,11 +3,8 @@ package edu.missouriwestern.csmp.gg.mwsu.entities;
 import edu.missouriwestern.csmp.gg.base.*;
 
 import java.util.Map;
-import java.util.logging.Logger;
 
 public class Chest extends Entity implements EventListener, Container {
-
-    private static Logger logger = Logger.getLogger(Guide.class.getCanonicalName());
 
     public Chest(Game game, Container startingLocation) {
         super(game, Map.of("sprites", "chest-normal",
