@@ -69,7 +69,9 @@ public class Guide extends Entity implements EventListener, Runnable {
             var location = (Tile) getGame().getEntityLocation(this);
             var board = location.getBoard();
             var destination = board.getAdjacentTile(location, direction);
-            if (destination != null && !destination.hasProperty("impassable")) {
+            if (destination != null &&
+                    destination.getRow() > 4 && // keep the guide off the top of the map
+                    !destination.hasProperty("impassable")) {
                 destination.addEntity(this);
             }
         }
